@@ -21,37 +21,37 @@ import random
 # print(random_randint_number)
 
 
-Top_of_range = int(input('Enter the last value: '))
+import random
 
-if Top_of_range:  # type: ignore
-    Top_of_range = int(Top_of_range)
-
-    if Top_of_range <= 0:
-        print('Please type a number larget than 0 next time.')
+try:
+    top_of_range = int(input("Enter the maximum number for the range: "))
+    if top_of_range <= 0:
+        print("Please enter a number greater than 0 next time.")
         quit()
-else:
-    print('please type a number next time')
+except ValueError:
+    print("Invalid input. Please enter a valid number next time.")
     quit()
-random_randrange_number = random.randint(0, Top_of_range)
 
-guesses = 0
+# Generate a random number between 0 and top_of_range (inclusive)
+target_number = random.randint(0, top_of_range)
+
+guess_count = 0
+
 while True:
-    guesses += 1
+    user_input = input("Make a guess: ")
 
-    user_guess = input('Make a guess: ')
-    if user_guess.isdigit():
-        user_guess = int(user_guess)
+    if user_input.isdigit():
+        guess = int(user_input)
+        guess_count += 1
     else:
-        print('Please type a number next time.')
+        print("Invalid input. Please enter a number.")
         continue
 
-    if user_guess == random_randrange_number:
-        print('your guess is right')
+    if guess == target_number:
+        print(
+            f"Congratulations! You guessed the correct number in {guess_count} tries.")
         break
-
-    if user_guess > random_randrange_number:
-        print('this number is greter then the expected number')
+    elif guess > target_number:
+        print("Too high. Try a smaller number.")
     else:
-        print('this number is smaller then the expected number')
-
-print(guesses)
+        print("Too low. Try a larger number.")
